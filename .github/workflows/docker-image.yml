@@ -29,13 +29,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_PAT }}
 
-      - name: Extract version using git describe
+      - name: Determine version
         id: vars
         run: |
-          VERSION=$(git describe --tags --abbrev=0)
-          if [ -z "$VERSION" ]; then
-            VERSION="0.1.0"
-          fi
+          VERSION=$(git describe --tags --abbrev=0 || echo "0.1.0-$(git rev-parse --short HEAD)")
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Build and push Docker image
@@ -48,4 +45,4 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/httpbin:${{ env.VERSION }}
 
       - name: Post run info
-        run: echo "Docker image built and pushed to GitHub Container Registry"
+        run: echo "Docker image built and pushed to GitHub Container Registry with tags latest and ${{ env.VERSION }}"
