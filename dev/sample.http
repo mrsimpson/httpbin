@@ -1,0 +1,10 @@
+###
+GET localhost:3000/somepath
+
+###
+POST localhost:3000/more?and=more&and=more
+Content-Type: application/json
+
+{
+  "lorem": "ipsum "
+}
