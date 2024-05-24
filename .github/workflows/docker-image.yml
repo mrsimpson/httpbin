@@ -33,6 +33,7 @@ jobs:
       - name: Determine version
         id: vars
         run: |
+          git fetch --tags
           VERSION=$(git describe --tags --abbrev=0 || echo "0.1.0-$(git rev-parse --short HEAD)")
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
