@@ -6,4 +6,4 @@ EXPOSE 3000
 USER 1000
 
 # Run the app
-CMD ["node", "server.js"]
+ENTRYPOINT ["node", "server.js"]
